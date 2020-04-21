@@ -1,7 +1,6 @@
 name: RepoAworkflow
 
-on:
-  push:
+on: [push]
  
 jobs:
   RepoAjobs:
@@ -15,3 +14,4 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           event-type: RepoAevent
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
