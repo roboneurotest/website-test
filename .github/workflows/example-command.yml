@@ -22,13 +22,13 @@ jobs:
           token: ${{ secrets.PAT }}
           commit-message: Add $PUB_NAME.json
           committer: NeuroLibre <neurolibre@gmail.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: '🆕✨ ${{ env.PUB_NAME }}'
+          author: NeuroLibre < NeuroLibre@users.noreply.github.com>
+          title: '🆕✨ Publication request - ${{ env.PUB_NAME }}'
           body: |
             This pull request has been automatially generated
             - [ ] Do this
             - [ ] Do that
-          labels: new_publication
+          labels: ready for publication
           assignees: agahkarakuzu
           reviewers: agahkarakuzu
-          branch: $PUB_NAME
+          branch: '${{ env.PUB_NAME }}'
