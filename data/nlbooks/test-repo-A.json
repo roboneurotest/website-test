@@ -1,0 +1,17 @@
+{
+  "authors": [
+    {
+      "affiliation": "UdeM",
+      "name": "Pierre Bellec",
+      "website": "https://github.com/pbellec"
+    }
+  ],
+  "date": "2020-03-26",
+  "image": "adni_featured.png",
+  "labels": [
+    "Publication"
+  ],
+  "summary": "A jupyter notebook containing analyses that give a highly predictive signature (HPS) of Alzheimer's disease dementia from cognitive and structural features using simulated data. ",
+  "title": "A highly predictive signature (HPS) of Alzheimer's disease dementia from cognitive and structural brain features",
+  "url": "https://simexp.github.io/vcog_hps_ad_book/intro.html"
+}
