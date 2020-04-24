@@ -21,12 +21,13 @@ jobs:
           echo ::set-env name=TAG_VER::$(echo $PUB_TAG | awk -F"-" '{print $2}')
           if [ ${{ env.TAG_TYPE }} == "pub" ] && [ ${{ env.TAG_VER }} == "v1" ]; then
             echo "Published for the first time."
+            echo ::set-env name=PR_TITLE::$(echo "✨New publication ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
+
           elif [ ${{ env.TAG_TYPE }} == "pub" ] && [ ${{ env.TAG_VER }} != "v1" ]; then
             echo "Updated publication."
-            echo ::set-env name=PR_TITLE::$(echo "✨New publication ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
+            echo ::set-env name=PR_TITLE::$(echo "✨UPDATE ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
           else
             echo "This is NOT type publish."
-            echo ::set-env name=PR_TITLE::$(echo "✨UPDATE ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
           fi          
       - name: Create Pull Request
         id: cpr
