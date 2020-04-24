@@ -5,7 +5,7 @@ on:
 env:
   PUB_NAME: ${{ github.event.repository.name }}
   PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
-  PUB_LABELS: ${{ toJson(github.event.client_payload.pubinfo.labels) }}
+  PUB_LABELS: ${{ toJson(github.event.client_payload.pubinfo.labels[0]) }}
   PUB_TAG: ${{ github.event.client_payload.pub_tag }}
 jobs:
   updateWebsite:
@@ -43,11 +43,19 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
+            ## Title
+            
+            ${{ toJson(github.event.client_payload.pubinfo.title) }}
+            
             This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
+            
+            ## Checklist
             - [ ] Publication is properly versioned (`pub-v#`). [See all releases](https://github.com/neurolibre/${{ env.PUB_NAME }}/releases).
             - [ ] [Link to the publication](https://neurolibre.com) is not broken.
             - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
             - [ ] Badges are properly populated on the publication card and the links are not broken. 
+            - [ ] Featured image is visible on the publication card. 
+
           labels: '${{ env.PR_LABELS }}'
           assignees: agahkarakuzu
           reviewers: agahkarakuzu
