@@ -6,12 +6,10 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          PUB_INFO: ${{toJson(github.event.client_payload.pubinfo)}}
       - name: Add reaction
         uses: actions/checkout@v2
       - run: mkdir -p dene
-      - run: echo "$PUB_INFO" > dene/info.json
+      - run: echo "${{ toJson(github.event.client_payload.pubinfo) }}"
       - name: Commit files
         run: |
           git add .
