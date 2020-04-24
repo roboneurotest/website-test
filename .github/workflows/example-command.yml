@@ -9,7 +9,7 @@ jobs:
       - name: Add reaction
         uses: actions/checkout@v2
         env:
-          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload.pubinfo) }}
       - run: mkdir -p dene
       - run: echo "$PAYLOAD_CONTEXT" > dene/info.json
       - name: Upload
