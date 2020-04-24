@@ -23,11 +23,12 @@ jobs:
           commit-message: Add $PUB_NAME.json
           committer: NeuroLibre <neurolibre@gmail.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: '[NEW PUBLICATION] $PUB_NAME'
+          title: '🚀 NEW PUBLICATION - ${{ env.PUB_NAME }}'
           body: |
             This pull request has been automatially generated
             - [ ] Do this
             - [ ] Do that
-          labels: newpub
+          labels: NEW_PUBLICATION
           assignees: agahkarakuzu
           reviewers: agahkarakuzu
+          branch: $PUB_NAME
