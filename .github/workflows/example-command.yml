@@ -11,7 +11,7 @@ jobs:
         env:
           PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload.pubinfo) }}
       - run: mkdir -p dene
-      - run: echo "$PAYLOAD_CONTEXT" > dene/info.json
+      - run: echo "${{ toJson(github.event.client_payload.pubinfo) }}" > dene/info.json
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
