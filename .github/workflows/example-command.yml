@@ -3,9 +3,9 @@ on:
   repository_dispatch:
     types: [publish]
 env:
-  PUB_NAME: ${{ github.event.repository.name }}
-  PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
-  PUB_LABELS: ${{ toJson(github.event.client_payload.pubinfo.labels[0]) }}
+  PUB_NAME: ${{ toJson(github.event.client_payload.pub_name) }}
+  PUB_INFO: ${{ toJson(github.event.client_payload.pub_info) }}
+  PUB_LABELS: ${{ toJson(github.event.client_payload.pub_info.labels[0]) }}
   PUB_TAG: ${{ github.event.client_payload.pub_tag }}
 jobs:
   updateWebsite:
@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
-          echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pubinfo.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; else echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; fi)
+          echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pub_info.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pub_info.authors[0].name }}; else echo ${{ github.event.client_payload.pub_info.authors[0].name }}; fi)
           echo ::set-env name=TAG_TYPE::$(echo $PUB_TAG | awk -F"-" '{print $1}')
           echo ::set-env name=TAG_VER::$(echo $PUB_TAG | awk -F"-" '{print $2}')
       - name: Conditionally assign ENV vars
@@ -45,11 +45,14 @@ jobs:
           body: |
             ## Title
             
-            ${{ toJson(github.event.client_payload.pubinfo.title) }}
+            ${{ toJson(github.event.client_payload.pub_info.title) }}
+            
+            ## Origin 
             
             This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
             
             ## Checklist
+            
             - [ ] Publication is properly versioned (`pub-v#`). [See all releases](https://github.com/neurolibre/${{ env.PUB_NAME }}/releases).
             - [ ] [Link to the publication](https://neurolibre.com) is not broken.
             - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
