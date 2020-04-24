@@ -1,10 +1,11 @@
 name: NeuroLibre - Add publication to the website 
 on:
   repository_dispatch:
-    types: [my-event]
+    types: [publish]
 env:
   PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
   PUB_NAME: ${{ github.event.repository.name }}
+  TAG_NAME: ${{ github.event.client_payload.tag }}
 jobs:
   example:
     runs-on: ubuntu-latest
