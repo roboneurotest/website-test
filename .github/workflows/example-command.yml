@@ -9,7 +9,7 @@ jobs:
       - name: Add reaction
         uses: actions/checkout@v2
       - run: mkdir -p dene
-      - run: echo ${{ github.event.client_payload.pubinfo }} > dene/info.json
+      - run: echo toJSON(${{ github.event.client_payload.pubinfo }}) > dene/info.json
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
