@@ -20,10 +20,10 @@ jobs:
         uses: peter-evans/create-pull-request@v2
         with:
           token: ${{ secrets.PAT }}
-          commit-message: Add $PUB_NAME.json
+          commit-message: '[ADD] ${{ env.PUB_NAME }}.json'
           committer: NeuroLibre <neurolibre@gmail.com>
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
-          title: '🆕✨ Publication request - ${{ env.PUB_NAME }}'
+          title: 'New publication ✨- ${{ env.PUB_NAME }} by ${{ github.event.client_payload.pubinfo.authors[0] }}'
           body: |
             This pull request has been automatially generated
             - [ ] Do this
