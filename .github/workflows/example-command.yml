@@ -5,9 +5,10 @@ on:
 env:
   PUB_NAME: ${{ github.event.repository.name }}
   PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
+  PUB_LABELS: ${{ toJson(github.event.client_payload.pubinfo.labels) }}
   PUB_TAG: ${{ github.event.client_payload.pub_tag }}
 jobs:
-  example:
+  updateWebsite:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout neurolibre/neurolibre.com
@@ -23,11 +24,12 @@ jobs:
         run: |          
           if [[ ${{ env.TAG_TYPE }} == "pub" ]] && [[ ${{ env.TAG_VER }} == "v1" ]]; then
             echo "First version."
-            echo ::set-env name=PR_TITLE::$(echo "✨New publication ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
-
+            echo ::set-env name=PR_TITLE::$(echo "✨${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
+            echo ::set-env name=PR_LABELS::$(echo "new, ${{ env.PUB_LABELS }}")
           elif [[ ${{ env.TAG_TYPE }} == "pub" ]] && [[ ${{ env.TAG_VER }} != "v1" ]]; then
             echo "New version."
-            echo ::set-env name=PR_TITLE::$(echo "🚀 New version (${{ env.TAG_VER }}) 🚀 ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
+            echo ::set-env name=PR_TITLE::$(echo "🚀${{ env.PUB_NAME }} (${{ env.TAG_VER }}) by  ${{ env.PUB_AUTHOR }}")
+            echo ::set-env name=PR_LABELS::$(echo "update, ${{ env.PUB_LABELS }}")
           else
             echo "This is NOT type publish. Ensure that workflow logic is in harmony with trigger tags."
           fi          
@@ -41,10 +43,12 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
-            This pull request has been automatially generated
-            - [ ] Do this
-            - [ ] Do that
-          labels: ready for publication
+            This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
+            - [ ] Publication is properly versioned (`pub-v#`). [See all releases](https://github.com/neurolibre/${{ env.PUB_NAME }}/releases).
+            - [ ] [Link to the publication](https://neurolibre.com) is not broken.
+            - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
+            - [ ] Badges are properly populated on the publication card and the links are not broken. 
+          labels: '${{ env.PR_LABELS }}'
           assignees: agahkarakuzu
           reviewers: agahkarakuzu
           branch: '${{ env.PUB_NAME }}'
