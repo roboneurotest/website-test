@@ -1,4 +1,4 @@
-name: example-command
+name: NeuroLibre - Add publication to the website 
 on:
   repository_dispatch:
     types: [my-event]
@@ -6,22 +6,28 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout neurolibre/neurolibre.com
         uses: actions/checkout@v2
-      - name: Show JSON
+      - name: Dump the JSON received from dispatch 
         env:
           PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
+          PUB_NAME: ${{ github.event.repository.name }}
         run: |
           mkdir -p data/nlbooks
-          echo "$PUB_INFO" > data/nlbooks/${{ github.event.repository.name }}.json
-      - name: Commit files
-        run: |
-          git add .
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Add ${{ github.event.repository.name }}.json" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+          echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v2
         with:
-          github_token: ${{ secrets.PAT }}
-          branch: master
+          token: ${{ secrets.PAT }}
+          commit-message: Add $PUB_NAME.json
+          committer: NeuroLibre <neurolibre@gmail.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          title: '[NEW PUBLICATION] $PUB_NAME'
+          body: |
+            This pull request has been automatially generated
+            - [ ] Do this
+            - [ ] Do that
+          labels: newpub
+          assignees: agahkarakuzu
+          reviewers: agahkarakuzu
