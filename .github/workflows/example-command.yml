@@ -8,4 +8,10 @@ jobs:
     steps:
       - name: Add reaction
         uses: actions/checkout@v2
-      - run: echo "${{ github.event.client_payload.pubinfo.title }}"
+      - run: mkdir -p dene
+      - run: echo ${{ github.event.client_payload.pubinfo }} > dene/info.json
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: my-artifact
+          path: dene
