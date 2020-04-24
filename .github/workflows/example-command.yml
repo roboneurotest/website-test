@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
-          echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pub_info.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pub_info.authors[0].name }}; else echo ${{ github.event.client_payload.pub_info.authors[0].name }}; fi)
+          echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pub_info.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pub_info.authors[0].name }}; else echo ${{ github.event.client_payload.pub_info.authors[0].name }} et al.; fi)
           echo ::set-env name=TAG_TYPE::$(echo $PUB_TAG | awk -F"-" '{print $1}')
           echo ::set-env name=TAG_VER::$(echo $PUB_TAG | awk -F"-" '{print $2}')
       - name: Conditionally assign ENV vars
