@@ -15,7 +15,7 @@ jobs:
         run: |
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
-          echo ::set-env name=PUB_AUTHOR::$(echo ${{ github.event.client_payload.pubinfo.authors[0].name }})
+          echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pubinfo.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pubinfo.authors[0].name }} et al.; else echo "tekli"; fi)
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v2
