@@ -8,8 +8,10 @@ jobs:
     steps:
       - name: Add reaction
         uses: actions/checkout@v2
+        env:
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
       - run: mkdir -p dene
-      - run: echo toJSON(${{ github.event.client_payload.pubinfo }}) > dene/info.json
+      - run: echo "$PAYLOAD_CONTEXT" > dene/info.json
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
