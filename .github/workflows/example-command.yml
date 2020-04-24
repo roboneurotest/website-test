@@ -9,7 +9,7 @@ jobs:
       - name: Add reaction
         uses: actions/checkout@v2
       - env:
-          pubinfo: ${{toJson(github.event.client_payload.pubinfo)}}
+          pubinfo: "${{toJson(github.event.client_payload.pubinfo)}}"
       - run: mkdir -p dene
       - run: echo $pubinfo > dene/info.json
       - name: Commit files
