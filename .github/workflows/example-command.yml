@@ -3,9 +3,10 @@ on:
   repository_dispatch:
     types: [publish]
 env:
-  PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
   PUB_NAME: ${{ github.event.repository.name }}
-  PUB_TAG: ${{ github.event.client_payload.tag }}
+  PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
+  TAG_TYPE: ${{ github.event.client_payload.tag_type }}
+  TAG_VER: ${{ github.event.client_payload.tag_ver }}
 jobs:
   example:
     runs-on: ubuntu-latest
@@ -17,7 +18,8 @@ jobs:
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
           echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pubinfo.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; else echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; fi)
-          echo "$PUB_TAG"
+          echo "${{env.TAG_TYPE}}"
+          echo "${{env.TAG_VER}}"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v2
