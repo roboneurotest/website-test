@@ -15,6 +15,7 @@ jobs:
         run: |
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
+          echo ::set-env name=PUB_AUTHOR::$(echo ${{ github.event.client_payload.pubinfo.authors[0].name }})
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v2
@@ -23,7 +24,7 @@ jobs:
           commit-message: '[ADD] ${{ env.PUB_NAME }}.json'
           committer: NeuroLibre <neurolibre@gmail.com>
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
-          title: 'New publication ✨- ${{ env.PUB_NAME }} by ${{ github.event.client_payload.pubinfo.authors[0].name }}'
+          title: '✨New publication ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}'
           body: |
             This pull request has been automatially generated
             - [ ] Do this
