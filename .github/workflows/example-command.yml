@@ -20,7 +20,7 @@ jobs:
           echo ::set-env name=TAG_TYPE::$(echo $PUB_TAG | awk -F"-" '{print $1}')
           echo ::set-env name=TAG_VER::$(echo $PUB_TAG | awk -F"-" '{print $2}')
           echo "$TAG_TYPE"
-          echo $TAG_TYPE"
+          echo $TAG_TYPE
           if [[ $TAG_TYPE == "pub" ]] && [[ $TAG_VER == "v1" ]]; then
             echo "Published for the first time."
             echo ::set-env name=PR_TITLE::$(echo "✨New publication ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
