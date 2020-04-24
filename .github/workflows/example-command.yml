@@ -8,4 +8,4 @@ jobs:
     steps:
       - name: Add reaction
         uses: actions/checkout@v2
-      - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
+      - run: echo ${{ github.event.client_payload.pubinfo }}
