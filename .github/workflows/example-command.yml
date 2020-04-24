@@ -17,9 +17,17 @@ jobs:
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
           echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pubinfo.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; else echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; fi)
-          echo "${{env.PUB_TAG}}"
-          echo $PUB_TAG | awk -F"-" '{print $1}' 
-          echo $PUB_TAG | awk -F"-" '{print $2}'
+          echo ::set-env name=TAG_TYPE::$(echo $PUB_TAG | awk -F"-" '{print $1}')
+          echo ::set-env name=TAG_VER::$(echo $PUB_TAG | awk -F"-" '{print $2}')
+          if [ ${{ env.TAG_TYPE }} == "pub" ] && [ ${{ env.TAG_VER }} == "v1" ]; then
+            echo "Published for the first time."
+          elif [ ${{ env.TAG_TYPE }} == "pub" ] && [ ${{ env.TAG_VER }} != "v1" ]; then
+            echo "Updated publication."
+            echo ::set-env name=PR_TITLE::$(echo "✨New publication ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
+          else
+            echo "This is NOT type publish."
+            echo ::set-env name=PR_TITLE::$(echo "✨UPDATE ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
+          fi          
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v2
@@ -28,7 +36,7 @@ jobs:
           commit-message: '[ADD] ${{ env.PUB_NAME }}.json'
           committer: NeuroLibre <neurolibre@gmail.com>
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
-          title: '✨New publication ✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}'
+          title: '${{ env.PR_TITLE }}'
           body: |
             This pull request has been automatially generated
             - [ ] Do this
