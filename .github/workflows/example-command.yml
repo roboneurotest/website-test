@@ -23,7 +23,7 @@ jobs:
           commit-message: '[ADD] ${{ env.PUB_NAME }}.json'
           committer: NeuroLibre <neurolibre@gmail.com>
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
-          title: 'New publication ✨- ${{ env.PUB_NAME }} by ${{ github.event.client_payload.pubinfo.authors[0] }}'
+          title: 'New publication ✨- ${{ env.PUB_NAME }} by ${{ github.event.client_payload.pubinfo.authors[0].name }}'
           body: |
             This pull request has been automatially generated
             - [ ] Do this
