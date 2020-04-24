@@ -5,7 +5,7 @@ on:
 env:
   PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
   PUB_NAME: ${{ github.event.repository.name }}
-  TAG_NAME: ${{ github.event.client_payload.tag }}
+  PUB_TAG: ${{ github.event.client_payload.tag }}
 jobs:
   example:
     runs-on: ubuntu-latest
@@ -17,6 +17,7 @@ jobs:
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
           echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pubinfo.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; else echo ${{ github.event.client_payload.pubinfo.authors[0].name }}; fi)
+          echo "$PUB_TAG"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v2
