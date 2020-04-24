@@ -9,7 +9,7 @@ jobs:
       - name: Add reaction
         uses: actions/checkout@v2
       - run: mkdir -p dene
-      - run: echo "${{ toJson(github.event.client_payload) }}" > dene/info.json
+      - run: echo ${{ toJson(github.event.client_payload) }} >> dene/info.json
       - name: Commit files
         run: |
           git add .
