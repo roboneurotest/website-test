@@ -2,6 +2,9 @@ name: NeuroLibre - Add publication to the website
 on:
   repository_dispatch:
     types: [my-event]
+env:
+  PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
+  PUB_NAME: ${{ github.event.repository.name }}
 jobs:
   example:
     runs-on: ubuntu-latest
@@ -9,9 +12,6 @@ jobs:
       - name: Checkout neurolibre/neurolibre.com
         uses: actions/checkout@v2
       - name: Dump the JSON received from dispatch 
-        env:
-          PUB_INFO: ${{ toJson(github.event.client_payload.pubinfo) }}
-          PUB_NAME: ${{ github.event.repository.name }}
         run: |
           mkdir -p data/nlbooks
           echo "$PUB_INFO" > data/nlbooks/$PUB_NAME.json
@@ -23,12 +23,12 @@ jobs:
           commit-message: Add $PUB_NAME.json
           committer: NeuroLibre <neurolibre@gmail.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: '🚀 NEW PUBLICATION - ${{ env.PUB_NAME }}'
+          title: '🆕✨ ${{ env.PUB_NAME }}'
           body: |
             This pull request has been automatially generated
             - [ ] Do this
             - [ ] Do that
-          labels: NEW_PUBLICATION
+          labels: new_publication
           assignees: agahkarakuzu
           reviewers: agahkarakuzu
           branch: $PUB_NAME
