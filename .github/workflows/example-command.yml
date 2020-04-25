@@ -50,21 +50,17 @@ jobs:
           title: '${{ env.PR_TITLE }}'
           body: |
             <img src="${{ env.IMG_LINK }}" alt="featured" width="300"/>
-            [![Version badge](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green)](${{ env.VER_LINK }})
-            [![Status badge](${{ env.STATUS_BADGE }})](${{ env.STATUS_LINK }})
-
-            ## Title
             
-            ${{ toJson(github.event.client_payload.pub_info.title) }}
-      
-            ## Origin 
+            ### ${{ github.event.client_payload.pub_info.title }}
             
-            This pull request has been automatially created from [$PUB_NAME](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
+            This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
             
-            ## Checklist
-            - [ ] Build is passing.
-            - [ ] [Link to the publication](https://neurolibre.com) is not broken (it may take some after a successful build, served from `gh-pages` branch.).
-            - [ ] Publication is properly versioned and associated with the respective release (check the version badge above).
+            ## ✅ Checklist 
+            
+            [![Version badge](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green)](${{ env.VER_LINK }}) [![Status badge](${{ env.STATUS_BADGE }})](${{ env.STATUS_LINK }}) ![[Book](https://img.shields.io/badge/NeuroLibreBook-${{ env.PUB_NAME }}-red.svg?&style=flat&color=ff0000)](https://neurolibre.com)
+            - [ ] Build is passing (click the badge).
+            - [ ] Publication is properly versioned and associated with the respective release (click the badge).
+            - [ ] Publication is live (click the badge, it may take some after a successful build).
             - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
             - [ ] Badges are properly populated on the publication card and the links are not broken. 
             - [ ] Featured image is visible on the publication card. 
