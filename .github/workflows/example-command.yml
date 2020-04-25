@@ -43,18 +43,21 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
+            <img src="https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/blob/master/${{ env.PUB_NAME }}_featured.png?raw=true" alt="featured" width="300"/>
+            
             ## Title
             
             ${{ toJson(github.event.client_payload.pub_info.title) }}
-            
+      
             ## Origin 
             
             This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
             
             ## Checklist
-            
+            ![Publish to neurolibre.com](https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/workflows/Publish%20to%20neurolibre.com/badge.svg)
+            - [ ] Build is passing (see the badge above). 
+            - [ ] [Link to the publication](https://neurolibre.com) is not broken (it may take some after a successful build, served from `gh-pages` branch.).
             - [ ] Publication is properly versioned (`pub-v#`). [See all releases](https://github.com/neurolibre/${{ env.PUB_NAME }}/releases).
-            - [ ] [Link to the publication](https://neurolibre.com) is not broken.
             - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
             - [ ] Badges are properly populated on the publication card and the links are not broken. 
             - [ ] Featured image is visible on the publication card. 
