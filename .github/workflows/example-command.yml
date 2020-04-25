@@ -50,22 +50,46 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
-            <img src="${{ env.IMG_LINK }}" alt="featured" width="300"/>
+            <p align="center" ><img src="{{ env.IMG_LINK }}" alt="featured" width="300"><p align="center">
+            <hr>
             
             ### ${{ github.event.client_payload.pub_info.title }}
             
-            ${{ env.INF_MSG }}            
+            #### ${{ env.INF_MSG }}            
             
-            ## 🛫Checklist 
+            ## 🛫 Checklist 
             
-            [![Version badge](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green)](${{ env.VER_LINK }}) [![Status badge](${{ env.STATUS_BADGE }})](${{ env.STATUS_LINK }}) ![[Book](${{ env.BOOK_BADGE }})](https://neurolibre.com)
-            - [ ] Build is passing (click the badge).
-            - [ ] Publication is properly versioned and associated with the respective release (click the badge).
-            - [ ] Publication is live (click the badge, it may take some after a successful build).
-            - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
-            - [ ] Badges are properly populated on the publication card and the links are not broken. 
-            - [ ] Featured image is visible on the publication card. 
+            [![Version badge](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green)](${{ env.VER_LINK }}) [![Status badge](${{ env.STATUS_BADGE }})](${{ env.STATUS_LINK }}) [![Book](${{ env.BOOK_BADGE }})](https://neurolibre.com)
+            
+            - [ ] **Build is passing**
+              It may take some time status badge to fetch status (green|pass or red|fail). Click the badge to monitor the process in real time.
+            <br>
 
+            - [ ] **Publication is properly versioned**
+               Click the badge to see the associated release in the source repository. Publication tags respect `pub-v*` format, where suffix is always `v1` for the first version. 
+            <br>
+
+            - [ ] **Publication is live**
+               It may take publication for a while to go live after a successful build due to page build and domain resolution. Note that the publication pages are built from the `gh-pages` branch of the source repository. 
+            <br>
+
+            - [ ] **[Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/"t1_book".json) is OK.**
+            <br>
+
+            - [ ] **Badges are properly populated on the publication card and the links are not broken.** 
+            <br>
+
+            - [ ] **Featured image is visible on the publication card.**
+            <br>
+            
+            TODO: 
+            * Mention (@) first author
+            * Use GitHub teams for reviewers & assigness
+            * Note about checking `gh-pages` settings 
+            
+            <hr>
+            <p align="center"><img src="https://www.neurolibre.com/img/neurolibre_logo.svg" alt="featured" width="50"/><br>NeuroLibre</p>
+            
           labels: '${{ env.PR_LABELS }}'
           assignees: agahkarakuzu
           reviewers: agahkarakuzu
