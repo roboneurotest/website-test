@@ -50,7 +50,7 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
-            <p align="center" ><img src="{{ env.IMG_LINK }}" alt="featured" width="300"><p align="center">
+            <p align="center" ><img src="${{ env.IMG_LINK }}" alt="featured" width="300"><p align="center">
             <hr>
             
             ### ${{ github.event.client_payload.pub_info.title }}
