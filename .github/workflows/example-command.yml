@@ -24,11 +24,11 @@ jobs:
         run: |          
           if [[ ${{ env.TAG_TYPE }} == "pub" ]] && [[ ${{ env.TAG_VER }} == "v1" ]]; then
             echo "First version."
-            echo ::set-env name=PR_TITLE::$(echo "✨${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
+            echo ::set-env name=PR_TITLE::$(echo "🆕✨ ${{ env.PUB_NAME }} by  ${{ env.PUB_AUTHOR }}")
             echo ::set-env name=PR_LABELS::$(echo "new, ${{ env.PUB_LABEL }}")
           elif [[ ${{ env.TAG_TYPE }} == "pub" ]] && [[ ${{ env.TAG_VER }} != "v1" ]]; then
             echo "New version."
-            echo ::set-env name=PR_TITLE::$(echo "🚀${{ env.PUB_NAME }} (${{ env.TAG_VER }}) by  ${{ env.PUB_AUTHOR }}")
+            echo ::set-env name=PR_TITLE::$(echo "🆙🚀 ${{ env.PUB_NAME }} (${{ env.TAG_VER }}) by  ${{ env.PUB_AUTHOR }}")
             echo ::set-env name=PR_LABELS::$(echo "update, ${{ env.PUB_LABEL }}")
           else
             echo "This is NOT type publish. Ensure that workflow logic is in harmony with trigger tags."
