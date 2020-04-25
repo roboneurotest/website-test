@@ -43,9 +43,9 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
-            <img src="https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/blob/master/${{ env.PUB_NAME }}_featured.png?raw=true" alt="featured" width="300"/>
-            ![https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/releases/tag/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green])
-            ![Publish to neurolibre.com](https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/workflows/Publish%20to%20neurolibre.com/badge.svg)
+            <img src="https://github.com/agahkarakuzu/$PUB_NAME/blob/master/$PUB_NAME_featured.png?raw=true" alt="featured" width="300"/>
+            ![https://github.com/agahkarakuzu/$PUB_NAME/releases/tag/$TAG_TYPE-$TAG_VER](https://img.shields.io/badge/$TAG_TYPE-$TAG_VER-green])
+            ![Publish to neurolibre.com](https://github.com/agahkarakuzu/$PUB_NAME/workflows/Publish%20to%20neurolibre.com/badge.svg)
 
             ## Title
             
@@ -53,10 +53,10 @@ jobs:
       
             ## Origin 
             
-            This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
+            This pull request has been automatially created from [$PUB_NAME](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
             
             ## Checklist
-            - [ ] Build is passing (see the status badge above). 
+            - [ ] ![Publish to neurolibre.com](https://github.com/agahkarakuzu/$PUB_NAME/workflows/Publish%20to%20neurolibre.com/badge.svg) 
             - [ ] [Link to the publication](https://neurolibre.com) is not broken (it may take some after a successful build, served from `gh-pages` branch.).
             - [ ] Publication is properly versioned and associated with the respective release (check the version badge above).
             - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
