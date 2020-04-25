@@ -35,8 +35,8 @@ jobs:
           fi
           echo ::set-env name=IMG_LINK::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/blob/master/${{ env.PUB_NAME }}_featured.png?raw=true")
           echo ::set-env name=VER_LINK::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/releases/tag/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}")
-          echo ::set-env name=STATUS_LINK::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/workflows/Publish%20to%20neurolibre.com/badge.svg)")
-
+          echo ::set-env name=STATUS_BADGE::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/workflows/Publish%20to%20neurolibre.com/badge.svg?branch=${{ env.TAG_TYPE }}-${{ env.TAG_VER }}")
+          echo ::set-env name=STATUS_LINK::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/actions")
           
           
       - name: Create Pull Request
@@ -49,9 +49,9 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
-            <img src=${{ env.IMG_LINK }} alt="featured" width="300"/>
-            ![${{ env.VER_LINK }}](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green])
-            ![Publish to neurolibre.com](${{ env.STATUS_LINK }})
+            <img src="${{ env.IMG_LINK }}" alt="featured" width="300"/>
+            [![Version badge](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green)](${{ env.VER_LINK }})
+            [![Status badge](${{ env.STATUS_BADGE }})](${{ env.STATUS_LINK }})
 
             ## Title
             
