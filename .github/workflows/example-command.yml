@@ -32,7 +32,13 @@ jobs:
             echo ::set-env name=PR_LABELS::$(echo "update, ${{ env.PUB_LABEL }}")
           else
             echo "This is NOT type publish. Ensure that workflow logic is in harmony with trigger tags."
-          fi          
+          fi
+          echo ::set-env name=IMG_LINK::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/blob/master/${{ env.PUB_NAME }}_featured.png?raw=true")
+          echo ::set-env name=VER_LINK::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/releases/tag/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}")
+          echo ::set-env name=STATUS_LINK::$(echo "https://github.com/agahkarakuzu/${{ env.PUB_NAME }}/workflows/Publish%20to%20neurolibre.com/badge.svg)")
+
+          
+          
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v2
@@ -43,9 +49,9 @@ jobs:
           author: NeuroLibre < NeuroLibre@users.noreply.github.com>
           title: '${{ env.PR_TITLE }}'
           body: |
-            <img src="https://github.com/agahkarakuzu/$PUB_NAME/blob/master/$PUB_NAME_featured.png?raw=true" alt="featured" width="300"/>
-            ![https://github.com/agahkarakuzu/$PUB_NAME/releases/tag/$TAG_TYPE-$TAG_VER](https://img.shields.io/badge/$TAG_TYPE-$TAG_VER-green])
-            ![Publish to neurolibre.com](https://github.com/agahkarakuzu/$PUB_NAME/workflows/Publish%20to%20neurolibre.com/badge.svg)
+            <img src=${{ env.IMG_LINK }} alt="featured" width="300"/>
+            ![${{ env.VER_LINK }}](https://img.shields.io/badge/${{ env.TAG_TYPE }}-${{ env.TAG_VER }}-green])
+            ![Publish to neurolibre.com](${{ env.STATUS_LINK }})
 
             ## Title
             
@@ -56,7 +62,7 @@ jobs:
             This pull request has been automatially created from [$PUB_NAME](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.
             
             ## Checklist
-            - [ ] ![Publish to neurolibre.com](https://github.com/agahkarakuzu/$PUB_NAME/workflows/Publish%20to%20neurolibre.com/badge.svg) 
+            - [ ] Build is passing.
             - [ ] [Link to the publication](https://neurolibre.com) is not broken (it may take some after a successful build, served from `gh-pages` branch.).
             - [ ] Publication is properly versioned and associated with the respective release (check the version badge above).
             - [ ] [Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is properly fetched.
