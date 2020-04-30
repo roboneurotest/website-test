@@ -16,7 +16,7 @@ jobs:
       - name: Dump the JSON received from dispatch 
         run: |
           mkdir -p data/nlbooks
-          echo "$PUB_INFO" > data/nlbooks/${env.PUB_NAME}.json
+          echo "$PUB_INFO" > data/nlbooks/${{env.PUB_NAME}}.json
           echo ::set-env name=PUB_AUTHOR::$(if [ -z "${{ github.event.client_payload.pub_info.authors[1].name }}" ]; then echo ${{ github.event.client_payload.pub_info.authors[0].name }}; else echo ${{ github.event.client_payload.pub_info.authors[0].name }} et al.; fi)
           echo ::set-env name=TAG_TYPE::$(echo $PUB_TAG | awk -F"-" '{print $1}')
           echo ::set-env name=TAG_VER::$(echo $PUB_TAG | awk -F"-" '{print $2}')
@@ -94,4 +94,4 @@ jobs:
           labels: '${{ env.PR_LABELS }}'
           assignees: agahkarakuzu
           reviewers: agahkarakuzu
-          branch: '${ env.PUB_NAME }'
+          branch: ${{ env.PUB_NAME }}
