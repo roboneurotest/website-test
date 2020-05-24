@@ -1,0 +1,32 @@
+{
+  "authors": [
+    {
+      "affiliation": "Please type in your affiliation here. For multiple affiliations, see the next author entry",
+      "name": "Agah Karakuzu",
+      "website": "https://github.com/agahkarakuzu"
+    },
+    {
+      "affiliation": [
+        "Affiliation 1",
+        "Affiliation 2"
+      ],
+      "name": "Another Author",
+      "website": "If availabe, this entry can point to author's GitHub page or personal website. Please delete this line if not available."
+    }
+  ],
+  "keywords": [
+    "kw1",
+    "kw2"
+  ],
+  "submission": [
+    {
+      "assignee": "agahkarakuzu",
+      "category": "Tutorial",
+      "date": "2020-05-24T00:00:00.000Z",
+      "id": 6,
+      "upstream": "https://github.com/agahkarakuzu/t1_book"
+    }
+  ],
+  "summary": "Please add a brief (50-60 words) summary of your work. This summary will appear at the publication card (https://neurolibre.com)",
+  "title": "T1 Book interactive tut"
+}
