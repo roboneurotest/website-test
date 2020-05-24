@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [publish]
 env:
-  PUB_NAME: ${{ toJson(github.event.client_payload.pub_name) }}
+  PUB_NAME: ${{ github.event.client_payload.pub_name }}
   PUB_INFO: ${{ toJson(github.event.client_payload.pub_info) }}
   PUB_LABEL: ${{ toJson(github.event.client_payload.pub_info.submission.category) }}
   PUB_TAG: ${{ github.event.client_payload.pub_tag }}
