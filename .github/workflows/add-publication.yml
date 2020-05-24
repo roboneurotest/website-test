@@ -73,7 +73,7 @@ jobs:
                It may take publication for a while to go live after a successful build due to page build and domain resolution. Note that the publication pages are built from the `gh-pages` branch of the source repository. 
             <br>
 
-            - [ ] **[Publication metadata](https://github.com/neurolibre/neurolibre.com/blob/master/data/nlbooks/"t1_book".json) is OK.**
+            - [ ] **[Publication metadata](https://github.com/neurolibre/roboneurotest/blob/master/data/nlbooks/${{ env.PUB_NAME }}.json) is OK.**
             <br>
 
             - [ ] **Badges are properly populated on the publication card and the links are not broken.** 
