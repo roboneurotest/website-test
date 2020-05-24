@@ -38,7 +38,7 @@ jobs:
           echo ::set-env name=STATUS_BADGE::$(echo "https://github.com/roboneurotest/${{ env.PUB_NAME }}/workflows/Publish%20to%20neurolibre.com/badge.svg?branch=${{ env.TAG_TYPE }}-${{ env.TAG_VER }}")
           echo ::set-env name=STATUS_LINK::$(echo "https://github.com/roboneurotest/${{ env.PUB_NAME }}/actions")
           echo ::set-env name=BOOK_BADGE::$(echo "https://img.shields.io/badge/NeuroLibreBook-${{ env.PUB_NAME }}-red.svg?&style=flat&color=ff0000")
-          echo ::set-env name=INF_MSG::$(echo "🤖 This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/neurolibre/${{ env.PUB_NAME }}) repository.")
+          echo ::set-env name=INF_MSG::$(echo "🤖 This pull request has been automatially created from [${{ env.PUB_NAME }}](https://github.com/roboneurotest/${{ env.PUB_NAME }}) repository.")
    
       - name: Create Pull Request
         id: cpr
